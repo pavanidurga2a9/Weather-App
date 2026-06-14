@@ -1,0 +1,48 @@
+
+body {
+    transition: background 1s ease-in-out, background-color 1s ease-in-out;
+}
+
+.glass-container {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10.6px);
+    -webkit-backdrop-filter: blur(10.6px);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Scrollbar hiding for history if needed */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Toggle Switch Styles */
+.toggle-checkbox:checked + .toggle-label {
+    background-color: rgba(59, 130, 246, 0.8);
+}
+.toggle-checkbox:checked + .toggle-label .toggle-dot {
+    transform: translateX(100%);
+}
+
+/* Deletion Button transition */
+.delete-btn {
+    opacity: 0.6;
+    transition: all 0.2s ease-in-out;
+}
+.delete-btn:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+

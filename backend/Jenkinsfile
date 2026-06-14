@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Install Dependencies') {
+            steps {
+                bat '''
+                python -m pip install -r requirements.txt
+                '''
+            }
+        }
+
+        stage('Django Check') {
+            steps {
+                bat '''
+                python manage.py check
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build Successful'
+        }
+
+        failure {
+            echo 'Build Failed'
+        }
+    }
+}

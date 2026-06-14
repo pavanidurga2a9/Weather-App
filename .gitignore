@@ -1,0 +1,24 @@
+# Python Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Django Local Configurations & Secrets
+backend/.env
+.env.local
+
+# Databases
+backend/db.sqlite3
+*.sqlite3
+
+# Python Caches and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
