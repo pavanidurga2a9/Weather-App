@@ -1,13 +1,21 @@
 pipeline {
     agent any
 
+    environment {
+        // Point to the system Python executable on this laptop
+        SYS_PYTHON = 'C:\\Users\\ks299\\AppData\\Local\\Programs\\Python\\Python312\\python.exe'
+    }
+
     stages {
-        stage('Install Dependencies') {
+        stage('Create Venv & Install Dependencies') {
             steps {
                 bat '''
-                cd backend
-                python -m pip install --upgrade pip
-                python -m pip install -r requirements.txt
+                echo "Creating local virtual environment inside Jenkins workspace..."
+                "%SYS_PYTHON%" -m venv venv
+                
+                echo "Upgrading pip and installing requirements..."
+                venv\\Scripts\\python -m pip install --upgrade pip
+                venv\\Scripts\\python -m pip install -r backend/requirements.txt
                 '''
             }
         }
@@ -15,8 +23,9 @@ pipeline {
         stage('Django Check') {
             steps {
                 bat '''
+                echo "Running Django checks..."
                 cd backend
-                python manage.py check
+                ..\\venv\\Scripts\\python manage.py check
                 '''
             }
         }
@@ -27,7 +36,7 @@ pipeline {
             echo 'Build and Verification Successful!'
         }
         failure {
-            echo 'Build Failed. Please check logs.'
+            echo 'Build Failed. Please check console output logs.'
         }
     }
 }
