@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Point to the system Python executable on this laptop
-        SYS_PYTHON = 'C:\\Users\\ks299\\AppData\\Local\\Programs\\Python\\Python312\\python.exe'
+        SYS_PYTHON = 'C:\\Users\ks299\\AppData\\Local\\Programs\\Python\\Python312\\python.exe'
     }
 
     stages {
@@ -16,6 +16,16 @@ pipeline {
                 echo "Upgrading pip and installing requirements..."
                 venv\\Scripts\\python -m pip install --upgrade pip
                 venv\\Scripts\\python -m pip install -r backend/requirements.txt
+                '''
+            }
+        }
+
+        stage('Django Migrate') {
+            steps {
+                bat '''
+                echo "Applying database migrations..."
+                cd backend
+                ..\\venv\\Scripts\\python manage.py migrate
                 '''
             }
         }
