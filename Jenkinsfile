@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        // Point to the system Python executable on this laptop
+        
         SYS_PYTHON = 'C:\\Users\ks299\\AppData\\Local\\Programs\\Python\\Python312\\python.exe'
     }
 
